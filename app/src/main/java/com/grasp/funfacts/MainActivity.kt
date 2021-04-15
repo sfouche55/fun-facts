@@ -11,7 +11,6 @@ import android.widget.TextView
 //import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-
     private val tag = MainActivity::class.simpleName
     private val factBook = FactBook()
     private val colorWheel = ColorWheel()
@@ -29,15 +28,23 @@ class MainActivity : AppCompatActivity() {
         factTextView = findViewById(R.id.factTextView)
         showFactButton = findViewById(R.id.showFactButton)
         relativeLayout = findViewById(R.id.relativeLayout)
+
+        setRandomFact(factTextView, showFactButton, relativeLayout)
+
         showFactButton!!.setOnClickListener {
-            // Update the fact TextView with a randomly selected fact
-            val fact = factBook.getFact()
-            val color = colorWheel.getColor()
-            factTextView!!.text = fact
-            relativeLayout!!.setBackgroundColor(color)
-            showFactButton!!.setTextColor(color)
+            setRandomFact(factTextView, showFactButton, relativeLayout)
         }
+
         //Toast.makeText(this, "Activity created successfully!", Toast.LENGTH_LONG).show()
-        Log.d(tag, "Logging from the onCreate() method.")
+        //Log.d(tag, "Logging from the onCreate() method.")
+    }
+
+    // Update the fact TextView with a randomly selected fact
+    private fun setRandomFact(view: TextView?, button: Button?, layout: RelativeLayout?) {
+        val fact = factBook.getFact()
+        val color = colorWheel.getColor()
+        view!!.text = fact
+        layout!!.setBackgroundColor(color)
+        button!!.setTextColor(color)
     }
 }
